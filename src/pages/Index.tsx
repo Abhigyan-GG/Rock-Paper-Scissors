@@ -41,7 +41,11 @@ const Index = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
-      soundManager.playGameStart();
+      try {
+        soundManager.playGameStart();
+      } catch (error) {
+        console.warn("Sound playback failed:", error);
+      }
     }, 200);
     return () => clearTimeout(timer);
   }, []);
