@@ -167,7 +167,11 @@ const Index = () => {
 
   // Enhanced reset with animations
   const resetGame = async () => {
-    await soundManager.playButtonClick();
+    try {
+      await soundManager.playButtonClick();
+    } catch (error) {
+      console.warn("Sound playback failed:", error);
+    }
 
     setIsLoaded(false);
 
@@ -185,7 +189,11 @@ const Index = () => {
 
   // Enhanced reset all with animations
   const resetAll = async () => {
-    await soundManager.playButtonClick();
+    try {
+      await soundManager.playButtonClick();
+    } catch (error) {
+      console.warn("Sound playback failed:", error);
+    }
 
     setIsLoaded(false);
 
