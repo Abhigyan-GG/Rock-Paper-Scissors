@@ -1,8 +1,12 @@
-
-export type GameMode = 'computer' | 'twoPlayer' | 'multiplayer' | null;
-export type Screen = 'modeSelect' | 'game' | 'result' | 'multiplayer';
-export type ChoiceId = 'rock' | 'paper' | 'scissors';
-export type GameResult = 'player1' | 'player2' | 'tie' | null;
+export type GameMode = "computer" | "twoPlayer" | "multiplayer" | null;
+export type Screen =
+  | "modeSelect"
+  | "game"
+  | "result"
+  | "multiplayer"
+  | "aiGame";
+export type ChoiceId = "rock" | "paper" | "scissors";
+export type GameResult = "player1" | "player2" | "tie" | null;
 
 export interface Choice {
   id: ChoiceId;
@@ -28,7 +32,7 @@ export interface MultiplayerPlayer {
 export interface GameRoom {
   id: string;
   players: MultiplayerPlayer[];
-  gameState: 'waiting' | 'playing' | 'finished';
+  gameState: "waiting" | "playing" | "finished";
   round: number;
   maxRounds: number;
   currentRound: number;
@@ -36,7 +40,7 @@ export interface GameRoom {
 
 export interface RoundResult {
   round: number;
-  result: 'player1' | 'player2' | 'tie';
+  result: "player1" | "player2" | "tie";
   players: MultiplayerPlayer[];
   playerChoices: {
     [playerId: string]: string;
