@@ -89,12 +89,24 @@ const Index = () => {
           // Update score with animation
           if (winner === "player1") {
             setScore((prev) => ({ ...prev, player1: prev.player1 + 1 }));
-            soundManager.playWin();
+            try {
+              soundManager.playWin();
+            } catch (e) {
+              console.warn("Sound failed:", e);
+            }
           } else if (winner === "player2") {
             setScore((prev) => ({ ...prev, computer: prev.computer + 1 }));
-            soundManager.playLose();
+            try {
+              soundManager.playLose();
+            } catch (e) {
+              console.warn("Sound failed:", e);
+            }
           } else {
-            soundManager.playTie();
+            try {
+              soundManager.playTie();
+            } catch (e) {
+              console.warn("Sound failed:", e);
+            }
           }
 
           setCurrentScreen("result");
@@ -106,7 +118,11 @@ const Index = () => {
       if (currentPlayer === 1) {
         setPlayerChoice(choice);
         setCurrentPlayer(2);
-        await soundManager.playTone(600, 0.1, "sine", 0.05); // Different tone for player 2
+        try {
+          await soundManager.playTone(600, 0.1, "sine", 0.05); // Different tone for player 2
+        } catch (error) {
+          console.warn("Sound playback failed:", error);
+        }
       } else {
         setPlayer2Choice(choice);
         setIsRevealing(true);
