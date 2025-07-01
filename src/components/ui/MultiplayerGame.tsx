@@ -753,7 +753,7 @@ const MultiplayerGame = () => {
         </div>
 
         <div className="space-y-6">
-          <div>
+          <div className="hover:transform-none">
             <label className="block text-lg font-semibold text-white/90 mb-3">
               Your Epic Name
             </label>
@@ -762,7 +762,7 @@ const MultiplayerGame = () => {
               placeholder="Enter your warrior name"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
-              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-colors duration-300 text-lg"
+              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg"
               maxLength={20}
             />
           </div>
@@ -796,7 +796,7 @@ const MultiplayerGame = () => {
             </div>
           </div>
 
-          <div>
+          <div className="hover:transform-none">
             <label className="block text-lg font-semibold text-white/90 mb-3">
               Room Code
             </label>
@@ -805,7 +805,7 @@ const MultiplayerGame = () => {
               placeholder="Enter 6-digit code"
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 font-mono text-center tracking-widest transition-colors duration-300 text-lg"
+              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 font-mono text-center tracking-widest text-lg"
               maxLength={6}
             />
           </div>
