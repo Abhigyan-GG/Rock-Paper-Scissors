@@ -3,6 +3,7 @@ import ModeSelector from "../components/ui/ModeSelector";
 import GameScreen from "../components/ui/GameScreen";
 import GameResult from "../components/ui/GameResult";
 import MultiplayerGame from "../components/ui/MultiplayerGame";
+import AIGame from "../components/ui/AIGame";
 import Layout from "../components/ui/Layout";
 import { soundManager } from "../utils/soundManager";
 import {
