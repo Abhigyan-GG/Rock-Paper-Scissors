@@ -64,7 +64,13 @@ const Index = () => {
 
     setTimeout(() => {
       setGameMode(mode);
-      setCurrentScreen(mode === "multiplayer" ? "multiplayer" : "game");
+      if (mode === "multiplayer") {
+        setCurrentScreen("multiplayer");
+      } else if (mode === "computer") {
+        setCurrentScreen("aiGame");
+      } else {
+        setCurrentScreen("game");
+      }
       setIsLoaded(true);
     }, 300);
   };
