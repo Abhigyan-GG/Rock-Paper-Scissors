@@ -397,7 +397,7 @@ export const useMultiplayerGame = () => {
         const isCurrentPlayerWinner = winner.id === socketId;
         setMessage(
           isCurrentPlayerWinner
-            ? `🏆 Congratulations! You won the game!`
+            ? `���� Congratulations! You won the game!`
             : `🎯 ${winner.name} wins the game! Good game!`,
         );
 
@@ -762,7 +762,7 @@ const MultiplayerGame = () => {
               placeholder="Enter your warrior name"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
-              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 text-lg"
+              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-colors duration-300 text-lg"
               maxLength={20}
             />
           </div>
@@ -805,7 +805,7 @@ const MultiplayerGame = () => {
               placeholder="Enter 6-digit code"
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 font-mono text-center tracking-widest transition-all duration-300 text-lg"
+              className="w-full p-4 glass rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 font-mono text-center tracking-widest transition-colors duration-300 text-lg"
               maxLength={6}
             />
           </div>
