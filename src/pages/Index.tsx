@@ -133,12 +133,24 @@ const Index = () => {
 
           if (winner === "player1") {
             setScore((prev) => ({ ...prev, player1: prev.player1 + 1 }));
-            soundManager.playWin();
+            try {
+              soundManager.playWin();
+            } catch (e) {
+              console.warn("Sound failed:", e);
+            }
           } else if (winner === "player2") {
             setScore((prev) => ({ ...prev, player2: prev.player2 + 1 }));
-            soundManager.playWin(); // Both players can win
+            try {
+              soundManager.playWin();
+            } catch (e) {
+              console.warn("Sound failed:", e);
+            } // Both players can win
           } else {
-            soundManager.playTie();
+            try {
+              soundManager.playTie();
+            } catch (e) {
+              console.warn("Sound failed:", e);
+            }
           }
 
           setCurrentScreen("result");
