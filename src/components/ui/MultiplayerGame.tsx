@@ -654,7 +654,7 @@ export const useMultiplayerGame = () => {
   };
 };
 
-// Enhanced UI Components with stunning animations
+// Enhanced UI Components
 
 const LoadingScreen = () => (
   <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
@@ -702,9 +702,6 @@ const ConnectionError = ({
     </div>
   </div>
 );
-
-// Rest of the components will continue in the next part due to length...
-// Let me continue with the remaining components
 
 const MultiplayerGame = () => {
   const gameProps = useMultiplayerGame();
@@ -893,8 +890,209 @@ const MultiplayerGame = () => {
     </div>
   );
 
-  // The rest of the component implementation continues...
-  // This is just the foundation - the full component would include all game states
+  // Playing Screen
+  const PlayingScreen = () => (
+    <div className="w-full max-w-4xl mx-auto space-y-8">
+      {/* Score Display */}
+      <div className="flex justify-center">
+        <div className="glass rounded-3xl p-6 flex items-center space-x-12">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-300">
+              {currentPlayer?.name}
+            </div>
+            <div className="text-4xl font-bold text-white">
+              {currentPlayer?.score}
+            </div>
+            <div className="text-sm text-white/60">You</div>
+          </div>
+
+          <div className="text-center">
+            <div className="text-3xl mb-2">⚔️</div>
+            <div className="text-sm text-white/80 font-medium">
+              Round {currentRoom?.round || 1} of {currentRoom?.maxRounds || 5}
+            </div>
+            {timeLeft > 0 && (
+              <div className={`text-2xl font-bold ${getTimerColor()} mt-2`}>
+                {timeLeft}s
+              </div>
+            )}
+          </div>
+
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-300">
+              {opponent?.name}
+            </div>
+            <div className="text-4xl font-bold text-white">
+              {opponent?.score}
+            </div>
+            <div className="text-sm text-white/60">Opponent</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Game Content */}
+      <div className="glass rounded-3xl p-8">
+        {roundResult ? (
+          // Round Result Display
+          <div className="text-center">
+            <h3 className="text-3xl font-bold mb-8 text-white">
+              🎲 Round Result
+            </h3>
+            <div className="flex justify-center items-center space-x-12 mb-8">
+              <div className="text-center">
+                <div className="text-sm text-white/60 mb-2">
+                  {currentPlayer?.name}
+                </div>
+                <div className="text-8xl animate-bounce">
+                  {getChoiceEmoji(playerChoice || "")}
+                </div>
+              </div>
+              <div className="text-6xl animate-pulse">⚡</div>
+              <div className="text-center">
+                <div className="text-sm text-white/60 mb-2">
+                  {opponent?.name}
+                </div>
+                <div
+                  className="text-8xl animate-bounce"
+                  style={{ animationDelay: "0.1s" }}
+                >
+                  {getChoiceEmoji(opponentChoice || "")}
+                </div>
+              </div>
+            </div>
+            <div className="text-2xl font-bold text-gradient-rainbow">
+              {message}
+            </div>
+          </div>
+        ) : (
+          // Choice Selection
+          <div className="text-center">
+            <h3 className="text-3xl font-bold mb-8 text-white">
+              {timeLeft > 0
+                ? `⏰ ${timeLeft}s remaining`
+                : "🎯 Make Your Choice"}
+            </h3>
+
+            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-8">
+              {["rock", "paper", "scissors"].map((choice) => (
+                <button
+                  key={choice}
+                  onClick={(e) => makeChoice(choice, e)}
+                  disabled={!!playerChoice || !!roundResult || timeLeft <= 0}
+                  className={`
+                    p-8 rounded-3xl border-2 text-6xl transition-all duration-300 transform
+                    ${
+                      playerChoice === choice
+                        ? "border-purple-400 bg-gradient-to-br from-purple-100/20 to-purple-200/20 scale-110 shadow-2xl"
+                        : playerChoice || roundResult || timeLeft <= 0
+                          ? "border-white/20 bg-white/5 opacity-50 cursor-not-allowed"
+                          : "border-white/30 glass hover:border-purple-400 hover:scale-105 hover:shadow-xl cursor-pointer"
+                    }
+                  `}
+                >
+                  {getChoiceEmoji(choice)}
+                  <div className="text-lg mt-3 capitalize font-medium text-white">
+                    {choice}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-3">
+              <div className="text-xl text-white/90">{message}</div>
+              {playerChoice && !roundResult && (
+                <div className="text-green-400 font-semibold flex items-center justify-center space-x-2">
+                  <span>✅</span>
+                  <span>Your choice: {playerChoice}</span>
+                </div>
+              )}
+              {opponentChoice === "made" && !roundResult && (
+                <div className="text-blue-400 font-semibold flex items-center justify-center space-x-2">
+                  <span>⚡</span>
+                  <span>Opponent ready!</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Action Buttons */}
+      <div className="text-center space-x-4">
+        <button
+          onClick={resetToMenu}
+          className="glass hover:bg-white/20 text-white px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105"
+        >
+          🚪 Leave Game
+        </button>
+
+        <button
+          onClick={toggleSettings}
+          className="glass hover:bg-white/20 text-white px-8 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105"
+        >
+          ⚙️ Settings
+        </button>
+      </div>
+    </div>
+  );
+
+  // Finished Screen
+  const FinishedScreen = () => (
+    <div className="w-full max-w-2xl mx-auto">
+      <div className="glass rounded-3xl shadow-2xl p-12 text-center animate-bounce-in">
+        <div className="text-8xl mb-8 animate-bounce">🏆</div>
+        <h2 className="text-4xl font-bold text-white mb-6">Game Complete!</h2>
+
+        {currentPlayer && opponent && (
+          <div className="mb-8">
+            <div className="text-xl mb-6 text-white/80">
+              Final Battle Results
+            </div>
+            <div className="glass rounded-2xl p-8">
+              <div className="flex justify-between items-center">
+                <div className="text-center">
+                  <div className="font-bold text-2xl text-purple-300">
+                    {currentPlayer.name}
+                  </div>
+                  <div className="text-5xl font-bold text-white">
+                    {currentPlayer.score}
+                  </div>
+                </div>
+                <div className="text-4xl">🆚</div>
+                <div className="text-center">
+                  <div className="font-bold text-2xl text-blue-300">
+                    {opponent.name}
+                  </div>
+                  <div className="text-5xl font-bold text-white">
+                    {opponent.score}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="text-2xl font-bold mb-8 text-gradient-rainbow">
+          {message}
+        </div>
+
+        <div className="space-y-4">
+          <button
+            onClick={startNewGame}
+            className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 text-lg"
+          >
+            🔄 Play Again
+          </button>
+          <button
+            onClick={resetToMenu}
+            className="w-full glass hover:bg-white/20 text-white py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 text-lg"
+          >
+            🏠 Back to Menu
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -924,8 +1122,8 @@ const MultiplayerGame = () => {
 
       {gameState === "menu" && <MenuScreen />}
       {gameState === "waiting" && <WaitingScreen />}
-
-      {/* Additional game states would be implemented here */}
+      {gameState === "playing" && <PlayingScreen />}
+      {gameState === "finished" && <FinishedScreen />}
     </div>
   );
 };
