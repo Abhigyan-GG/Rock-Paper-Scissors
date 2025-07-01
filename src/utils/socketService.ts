@@ -8,7 +8,7 @@ class SocketService {
 
   private serverUrl =
     process.env.NODE_ENV === 'production'
-      ? 'https://rps-backend-byxk.onrender.com'
+      ? 'https://rock-paper-scissors-zcak.onrender.com'
       : 'http://localhost:3001';
 
   connect(): Promise<void> {
