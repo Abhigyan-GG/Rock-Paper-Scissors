@@ -48,7 +48,11 @@ const Index = () => {
 
   // Enhanced mode selection with animations
   const handleModeSelect = async (mode: GameMode) => {
-    await soundManager.playButtonClick();
+    try {
+      await soundManager.playButtonClick();
+    } catch (error) {
+      console.warn("Sound playback failed:", error);
+    }
 
     // Add exit animation
     setIsLoaded(false);
