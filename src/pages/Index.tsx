@@ -245,6 +245,13 @@ const Index = () => {
           </div>
         );
 
+      case "aiGame":
+        return (
+          <div className={baseClasses}>
+            <AIGame onBackToModeSelection={resetAll} />
+          </div>
+        );
+
       case "game":
         return (
           <div className={baseClasses}>
