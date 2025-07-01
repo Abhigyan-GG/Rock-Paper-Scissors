@@ -62,7 +62,11 @@ const Index = () => {
 
   // Enhanced choice handling with animations and sound
   const handleChoice = async (choice: Choice) => {
-    await soundManager.playChoice();
+    try {
+      await soundManager.playChoice();
+    } catch (error) {
+      console.warn("Sound playback failed:", error);
+    }
 
     if (gameMode === "computer") {
       setPlayerChoice(choice);
