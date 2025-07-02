@@ -41,7 +41,8 @@ const ChoiceButton: React.FC<ChoiceButtonProps> = ({
     setTimeout(() => setIsPressed(false), 150);
 
     // Particle explosion effect
-    const rect = e.currentTarget.getBoundingClientRect();
+    const rect = e.currentTarget?.getBoundingClientRect();
+    if (!rect) return onClick(choice);
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
